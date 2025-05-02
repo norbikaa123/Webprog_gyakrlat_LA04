@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenNature - Kapcsolat</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">GreenNature</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Kezdőlap</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Galéria</a></li>
+          <li class="nav-item"><a class="nav-link" href="data.html">Növények és Állatok</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Kapcsolat</a></li>
+          <li class="nav-item"><a class="nav-link" href="kirandulas.html">Kirándulási Tippek</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <h1 class="mb-4 text-success">Kapcsolatfelvétel</h1>
+    <form id="contactForm" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Név</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email cím</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="subject" class="form-label">Tárgy</label>
+        <input type="text" class="form-control" id="subject" required>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Tartózkodási hely</label>
+        <input type="text" class="form-control" id="location" required>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Üzenet</label>
+        <textarea class="form-control" id="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Küldés</button>
+    </form>
+    <div id="formAlert" class="alert mt-3 d-none"></div>
+  </main>
+
+  <footer class="bg-success text-white text-center py-3">
+    <p>&copy; 2025 GreenNature – Kapcsolat</p>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const alertBox = document.getElementById('formAlert');
+      
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+      
+      if ([name, email, subject, location, message].some(f => f.length < 10) || !isValidEmail(email)) {
+        alertBox.className = 'alert alert-danger';
+        alertBox.textContent = 'Minden mezőt ki kell tölteni! A szöveges mezők legalább 10 karakteresek legyenek, és az email cím formátuma is legyen helyes.';
+        alertBox.classList.remove('d-none');
+      } else {
+        alertBox.className = 'alert alert-success';
+        alertBox.textContent = 'Az üzeneted sikeresen elküldve!';
+        alertBox.classList.remove('d-none');
+        this.reset();
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
